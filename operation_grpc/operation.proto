@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+option go_package="rt0805/tp_app/operation_grpc";
+
+message Operation {
+  string Type = 1;
+  bool HasSucceeded = 2;
+}
+
+message Device {
+  string Name = 1;
+  int32 Total_operations = 2;
+  int32 Failed_operations = 3;
+  repeated Operation Operations = 4;
+}
+
+service DeviceService {
+  rpc SendData(DeviceDataRequest) returns (DeviceDataResponse) {}
+}
+
+message DeviceDataRequest {
+  Device device = 1;
+}
+
+message DeviceDataResponse {
+  bool success = 1;
+}
