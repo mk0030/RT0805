@@ -49,6 +49,12 @@ func main() {
 
 	// Construire le chemin complet du fichier
 	fullPath := filepath.Join(basePath, fileName)
+
+    // Vérifier si le fichier existe
+	if _, err := os.Stat(fullPath); os.IsNotExist(err) {
+		log.Fatalf("Le fichier %s n'existe pas.", fullPath)
+	}
+    
     // Ouvrir le fichier JSON
     file, err := os.Open(fullPath)
     if err != nil {
